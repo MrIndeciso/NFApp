@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "634213506315",
+    "firebase_url": "https://nfapp-92dd5.firebaseio.com",
+    "project_id": "nfapp-92dd5",
+    "storage_bucket": "nfapp-92dd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634213506315:android:5fd031fcb1542ed872960e",
+        "android_client_info": {
+          "package_name": "com.mrindeciso.nfapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634213506315-4fmjsiufutei0mgv0eq3man5b1k84aar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjIlUHYHqQJYTiBprPCzxrLrnaIscQLWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634213506315-4fmjsiufutei0mgv0eq3man5b1k84aar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

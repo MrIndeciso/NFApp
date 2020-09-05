@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    app:startDestination="@id/menuHome">
+
+    <fragment
+        android:id="@id/menuHome"
+        android:name="com.mrindeciso.nfapp.ui.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_menuHome_to_newUserFragment"
+            app:destination="@id/newUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@id/menuProfile"
+        android:name="com.mrindeciso.nfapp.ui.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_menuProfile_to_newUserFragment"
+            app:destination="@id/newUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newUserFragment"
+        android:name="com.mrindeciso.nfapp.ui.NewUserFragment"
+        android:label="NewUserFragment" />
+</navigation>

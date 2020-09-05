@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NFApp</string>
+    <string name="menu_profile">Profilo</string>
+    <string name="menu_home">Home</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_register_label">Non ho un account</string>
+</resources>
