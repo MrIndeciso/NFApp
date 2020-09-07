@@ -19,14 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TestActivity"
-            android:icon="@drawable/common_google_signin_btn_text_light_focused"
-            android:label="Robba" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
