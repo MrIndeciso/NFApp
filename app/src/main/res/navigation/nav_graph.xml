@@ -7,17 +7,11 @@
         android:id="@id/menuHome"
         android:name="com.mrindeciso.nfapp.ui.HomeFragment"
         android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_menuHome_to_newUserFragment"
-            app:destination="@id/newUserFragment" />
     </fragment>
     <fragment
         android:id="@id/menuProfile"
         android:name="com.mrindeciso.nfapp.ui.ProfileFragment"
         android:label="ProfileFragment" >
-        <action
-            android:id="@+id/action_menuProfile_to_newUserFragment"
-            app:destination="@id/newUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/newUserFragment"

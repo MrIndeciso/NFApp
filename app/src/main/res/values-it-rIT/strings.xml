@@ -3,7 +3,17 @@
     <string name="app_name">NFApp</string>
     <string name="menu_profile">Profilo</string>
     <string name="menu_home">Home</string>
-    <string name="login_username_hint">Username</string>
+    <string name="login_username_hint">Indirizzo Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_register_label">Non ho un account</string>
+    <string name="login_button_login">Login</string>
+    <string name="login_button_google">Continua con Google</string>
+    <string name="login_button_facebook">Continua con Facebook</string>
+    <string name="error_no_internet_connection">È necessaria una connessione a Internet per poter utilizzare questa applicazione</string>
+    <string name="login_login_label">Ho già un account</string>
+    <string name="login_button_register">Registrati</string>
+    <string name="login_name_hint">Nome</string>
+    <string name="login_surname_hint">Cognome</string>
+    <string name="login_repeatPassword_hint">Ripeti Password</string>
+    <string name="login_error_label">Le due password non coincidono</string>
 </resources>
