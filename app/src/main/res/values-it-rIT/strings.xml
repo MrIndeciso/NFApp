@@ -16,4 +16,6 @@
     <string name="login_surname_hint">Cognome</string>
     <string name="login_repeatPassword_hint">Ripeti Password</string>
     <string name="login_error_label">Le due password non coincidono</string>
+    <string name="login_error_generic">Qualcosa è andato storto durante il processo di autenticazione. Per favore riprovare</string>
+    <string name="menu_news">Bacheca</string>
 </resources>

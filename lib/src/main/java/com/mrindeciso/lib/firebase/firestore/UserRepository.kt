@@ -1,6 +1,5 @@
 package com.mrindeciso.lib.firebase.firestore
 
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.mrindeciso.lib.models.User
@@ -32,11 +31,6 @@ class UserRepository @Inject constructor(
                 .get()
                 .await()
                 .documents.let {
-                    Log.i("Size", it.size.toString())
-
-                    Log.i("Item", it.first().toString())
-                    Log.i("ItemObj", it.first().data?.toString() ?: "")
-
                     it.firstOrNull()?.toObject()
                 }
         } catch (e: Exception) {

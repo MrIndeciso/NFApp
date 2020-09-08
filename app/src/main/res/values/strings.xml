@@ -15,4 +15,6 @@
     <string name="login_surname_hint">Surname</string>
     <string name="login_repeatPassword_hint">Repeat Password</string>
     <string name="login_error_label">The passwords do not match</string>
+    <string name="login_error_generic">Something went wrong during the authentication process. Please try again</string>
+    <string name="menu_news">News</string>
 </resources>

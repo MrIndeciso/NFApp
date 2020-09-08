@@ -2,6 +2,7 @@ package com.mrindeciso.nfapp.ui
 
 import android.content.Intent
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -10,7 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.mrindeciso.lib.extensions.onClick
+import com.mrindeciso.lib.extensions.*
 import com.mrindeciso.lib.firebase.firestore.UserRepository
 import com.mrindeciso.lib.models.User
 import com.mrindeciso.lib.preferences.PreferenceManager
@@ -71,10 +72,6 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                 .let {
                     val user = userRepository.getUserByUID(it.uid)
 
-                    Log.i("User", it.uid)
-
-                    Log.i("User2", user.toString())
-
                     if (user != null) {
                         preferenceManager.currentUser = user
                         findNavController().navigate(R.id.menuHome)
@@ -88,7 +85,7 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                     }
                 }
         } catch (e: Exception) {
-            showErrorMessage()
+            showErrorMessage(R.string.login_error_generic)
         }
     }
 
@@ -103,8 +100,23 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
         }
     }
 
-    private fun showErrorMessage() {
+    private suspend fun firebaseSignInWithEmailPassword(email: String, password: String): String? {
+        return try {
+            auth.signInWithEmailAndPassword(email, password)
+                .await()
+                .user
+                ?.uid
+        } catch (e: Exception) {
+            null
+        }
+    }
 
+    private fun showErrorMessage(@StringRes body: Int) {
+        MaterialDialog(requireContext()) {
+            title()
+            message(textRes = body)
+            positiveButton(autoDismiss = true)
+        }
     }
 
     private fun register(
@@ -127,6 +139,8 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
             login()
         }
 
+        it.buttonGoogle.isVisible = uid == null
+
         it.buttonLogin.setText(R.string.login_button_register)
         it.buttonLogin.onClick {
             if (tilPassword.editText?.text.toString() != tilRepeatPassword.editText?.text.toString()) {
@@ -144,7 +158,7 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                     )
 
                 if (userId == null) {
-                    showErrorMessage()
+                    showErrorMessage(R.string.login_error_generic)
                     return@launch
                 }
 
@@ -178,7 +192,26 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
 
         it.buttonLogin.setText(R.string.login_button_login)
         it.buttonLogin.onClick {
+            lifecycleScope.launch {
+                val uid = firebaseSignInWithEmailPassword(
+                    it.tilUsername.editText?.text.toString(),
+                    it.tilPassword.editText?.text.toString()
+                )
 
+                if (uid == null) {
+                    showErrorMessage(R.string.login_error_generic)
+                } else {
+                    val user = userRepository.getUserByUID(uid)
+
+                    if (user == null) {
+                        register() //This makes no sense though
+                    } else {
+                        preferenceManager.currentUser = user
+
+                        findNavController().navigate(R.id.menuHome)
+                    }
+                }
+            }
         }
     }
 
@@ -190,13 +223,14 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                 val account = GoogleSignIn.getSignedInAccountFromIntent(data)
                 try {
                     val result = account.getResult(ApiException::class.java)
+
                     lifecycleScope.launch {
                         firebaseAuthWithGoogleToken(result.idToken!!)
                     }
                 } catch (e: ApiException) {
-
+                    showErrorMessage(R.string.login_error_generic)
                 } catch (e: NullPointerException) {
-
+                    showErrorMessage(R.string.login_error_generic)
                 }
             }
         }

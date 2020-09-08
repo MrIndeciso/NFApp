@@ -17,4 +17,8 @@
         android:id="@+id/newUserFragment"
         android:name="com.mrindeciso.nfapp.ui.NewUserFragment"
         android:label="NewUserFragment" />
+    <fragment
+        android:id="@id/menuNews"
+        android:name="com.mrindeciso.nfapp.ui.NewsFragment"
+        android:label="NewsFragment" />
 </navigation>

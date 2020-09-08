@@ -17,8 +17,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment: ViewBoundFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private lateinit var firebaseAuth: FirebaseAuth
-
     @Inject
     lateinit var connectivityManager: ConnectivityManager
 
@@ -28,12 +26,10 @@ class HomeFragment: ViewBoundFragment<FragmentHomeBinding>(FragmentHomeBinding::
     override fun onStart() {
         super.onStart()
 
-        firebaseAuth = Firebase.auth
+        requireActivity().setTitle(R.string.menu_home)
 
         //checkInternet()
         checkLogin()
-
-        //Log.wtf("Error", auth.currentUser?.displayName + auth.currentUser?.email)
     }
 
     private fun checkLogin() {
