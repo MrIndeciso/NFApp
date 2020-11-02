@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.mrindeciso.lib.firebase.firestore.UserRepository
+import com.mrindeciso.lib.models.User
 import com.mrindeciso.lib.preferences.PreferenceManager
 
 class MainActivityViewModel @ViewModelInject constructor(
@@ -20,6 +21,10 @@ class MainActivityViewModel @ViewModelInject constructor(
 
             emit(remoteUser != it)
         }
+    }
+
+    fun updateFCMToken(user: User, newToken: String): LiveData<Boolean> = liveData {
+        emit(userRepository.updateUserFCM(user.copy(fcmToken = newToken)))
     }
 
 }

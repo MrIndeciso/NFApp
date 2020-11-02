@@ -5,4 +5,9 @@ import javax.inject.Inject
 
 class ClassesRepository @Inject constructor(
     firestore: FirebaseFirestore
-)
+) {
+
+    private val classesCollection = firestore.collection("classes")
+
+
+}

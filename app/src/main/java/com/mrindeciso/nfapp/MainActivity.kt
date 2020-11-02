@@ -1,12 +1,14 @@
 package com.mrindeciso.nfapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.mrindeciso.lib.models.User
 import com.mrindeciso.lib.preferences.PreferenceManager
 import com.mrindeciso.nfapp.databinding.ActivityMainBinding
@@ -42,14 +44,28 @@ class MainActivity : AppCompatActivity() {
             if (it.permission_level == User.PermissionLevel.ADMINISTRATOR) {
                 viewBinding.bottomAppBar.menu.findItem(R.id.menuAdministration).isVisible = true
             }
+
+            checkForFCMToken(it)
         }
 
         hideBottomAppBar()
     }
 
+    private fun checkForFCMToken(user: User) {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            it.result?.let {
+                if (it != user.fcmToken) {
+                    mainActivityViewModel.updateFCMToken(user, it).observe(this) {
+                        Log.i("MainActivity", "Updated FCM Token")
+                    }
+                }
+            }
+        }
+    }
+
     private fun hideBottomAppBar() {
         findNavController(R.id.fragmentContainer).addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id) {
+            when (destination.id) {
                 R.id.newUserFragment -> {
                     viewBinding.bottomAppBar.isVisible = false
                 }

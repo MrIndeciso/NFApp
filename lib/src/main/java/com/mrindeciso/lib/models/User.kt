@@ -25,6 +25,9 @@ data class User(
     @Json(name = "banned")
     val banned: Boolean = false,
 
+    @Json(name = "fcmToken")
+    val fcmToken: String = "",
+
     @Json(name = "permission_level")
     val permission_level: PermissionLevel = PermissionLevel.USER
 

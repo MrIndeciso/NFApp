@@ -12,22 +12,11 @@ class UserRepository @Inject constructor(
 
     private val userCollection = firestore.collection("users")
 
-    suspend fun getUserById(userId: String): User? {
-        return try {
-            userCollection
-                .document(userId)
-                .get()
-                .await()
-                .toObject()
-        } catch (e: Exception) {
-            null
-        }
-    }
-
     suspend fun getUserByUID(uid: String): User? {
         return try {
             userCollection
                 .whereEqualTo("id", uid)
+                .limit(1)
                 .get()
                 .await()
                 .documents.let {
@@ -38,10 +27,38 @@ class UserRepository @Inject constructor(
         }
     }
 
+    private suspend fun getIDbyUID(uid: String): String {
+        return try {
+            userCollection
+                .whereEqualTo("id", uid)
+                .limit(1)
+                .get()
+                .await()
+                .documents
+                .firstOrNull()
+                ?.id
+                ?: ""
+        } catch (e: Exception) {
+            ""
+        }
+    }
+
     suspend fun addUser(user: User): Boolean {
         return try {
             userCollection
                 .add(user)
+                .await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    suspend fun updateUserFCM(user: User): Boolean {
+        return try {
+            userCollection
+                .document(getIDbyUID(user.id))
+                .update("fcmToken", user.fcmToken)
                 .await()
             true
         } catch (e: Exception) {
