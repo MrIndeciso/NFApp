@@ -14,6 +14,8 @@ data class News(
 
     val image: String? = null,
 
+    val appearAfter: Timestamp? = null,
+
     val disappearAfter: Timestamp? = null
 
 )

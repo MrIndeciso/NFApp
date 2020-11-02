@@ -3,6 +3,7 @@ package com.mrindeciso.nfapp.ui
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mrindeciso.lib.models.News
 import com.mrindeciso.lib.ui.ViewBoundFragment
 import com.mrindeciso.nfapp.R
@@ -25,7 +26,11 @@ class NewsFragment: ViewBoundFragment<FragmentNewsBinding>(FragmentNewsBinding::
 
         viewBinding.recView.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = NewsAdapter(newsList)
+            adapter = NewsAdapter(newsList, loadImage = { pos, imgView ->
+                Glide.with(this)
+                    .load(newsViewModel.getImageReference(newsList[pos]))
+                    .into(imgView)
+            })
         }
 
         newsViewModel.getNews().observe(this, {
