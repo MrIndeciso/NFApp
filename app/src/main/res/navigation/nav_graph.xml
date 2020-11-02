@@ -40,7 +40,11 @@
     <fragment
         android:id="@+id/editClassesFragment"
         android:name="com.mrindeciso.nfapp.ui.administration.EditClassesFragment"
-        android:label="EditClassesFragment" />
+        android:label="EditClassesFragment">
+        <action
+            android:id="@+id/action_editClassesFragment_to_newClassFragment"
+            app:destination="@id/newClassFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editCoursesFragment"
         android:name="com.mrindeciso.nfapp.ui.administration.EditCoursesFragment"
@@ -53,5 +57,19 @@
         android:id="@+id/newPostFragment"
         android:name="com.mrindeciso.nfapp.ui.administration.NewPostFragment"
         android:label="NewPostFragment" />
+    <fragment
+        android:id="@+id/newClassFragment"
+        android:name="com.mrindeciso.nfapp.ui.administration.NewClassFragment"
+        android:label="NewClassFragment">
+        <argument
+            android:name="prefill"
+            android:defaultValue="@null"
+            app:argType="com.mrindeciso.lib.models.SchoolClass"
+            app:nullable="true" />
+        <argument
+            android:name="isEdit"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
 
 </navigation>
