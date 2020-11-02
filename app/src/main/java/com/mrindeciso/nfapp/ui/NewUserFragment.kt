@@ -1,7 +1,6 @@
 package com.mrindeciso.nfapp.ui
 
 import android.content.Intent
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -38,6 +37,8 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
 
     override fun onStart() {
         super.onStart()
+
+        activity?.setTitle(R.string.login_title)
 
         withBinding {
             it.buttonGoogle.onClick {
@@ -225,7 +226,7 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                     val result = account.getResult(ApiException::class.java)
 
                     lifecycleScope.launch {
-                        firebaseAuthWithGoogleToken(result.idToken!!)
+                        firebaseAuthWithGoogleToken(result?.idToken!!)
                     }
                 } catch (e: ApiException) {
                     showErrorMessage(R.string.login_error_generic)

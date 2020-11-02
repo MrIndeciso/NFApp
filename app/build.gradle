@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
     compileSdkVersion 30
@@ -55,8 +54,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //Dagger Hilt
-    implementation 'com.google.dagger:hilt-android:2.28.3-alpha'
-    kapt 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
+    implementation 'com.google.dagger:hilt-android:2.29.1-alpha'
+    kapt 'com.google.dagger:hilt-android-compiler:2.29.1-alpha'
     //https://dagger.dev/hilt/gradle-setup
 
     //Dagger Hilt for AndroidX
@@ -80,7 +79,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:18.0.0'
     implementation 'com.google.firebase:firebase-messaging:21.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:22.0.0'
-    implementation 'com.google.firebase:firebase-perf:19.0.9'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 

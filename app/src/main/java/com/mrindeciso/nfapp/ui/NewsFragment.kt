@@ -1,10 +1,8 @@
 package com.mrindeciso.nfapp.ui
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.Timestamp
 import com.mrindeciso.lib.models.News
 import com.mrindeciso.lib.ui.ViewBoundFragment
 import com.mrindeciso.nfapp.R
@@ -34,12 +32,6 @@ class NewsFragment: ViewBoundFragment<FragmentNewsBinding>(FragmentNewsBinding::
             newsList.clear()
             newsList.addAll(it)
             viewBinding.recView.adapter?.notifyDataSetChanged()
-        })
-
-        newsViewModel.postNews(
-            News(Timestamp.now(), "Title", "Author", "Message")
-        ).observe(this, {
-            Log.i("Result", it.toString())
         })
     }
 
