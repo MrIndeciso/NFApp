@@ -14,11 +14,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingStart="8dp"
         android:paddingTop="8dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="8dp"
-        android:layout_height="match_parent">
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/tvTimestamp"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/tvTitle"
+            app:layout_constraintBottom_toTopOf="@+id/tvTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,40 +38,39 @@
             android:gravity="start"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/tvAuthor"
+            app:layout_constraintBottom_toTopOf="@+id/tvAuthor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTimestamp" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTimestamp" />
 
         <TextView
             android:id="@+id/tvAuthor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/tvMessage"
+            app:layout_constraintBottom_toTopOf="@+id/tvMessage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <TextView
             android:id="@+id/tvMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/ivPostImage"
+            app:layout_constraintBottom_toTopOf="@+id/ivPostImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAuthor" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAuthor" />
 
         <ImageView
             android:id="@+id/ivPostImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMessage" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

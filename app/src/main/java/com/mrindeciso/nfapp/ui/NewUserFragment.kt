@@ -38,7 +38,7 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
     override fun onStart() {
         super.onStart()
 
-        activity?.setTitle(R.string.login_title)
+        activity?.setTitle(R.string.login_button_login)
 
         withBinding {
             it.buttonGoogle.onClick {

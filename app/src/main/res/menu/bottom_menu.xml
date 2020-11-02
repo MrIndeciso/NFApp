@@ -12,6 +12,12 @@
         android:id="@+id/menuProfile" />
 
     <item
+        android:id="@+id/menuAdministration"
+        android:icon="@android:drawable/arrow_down_float"
+        android:title="@string/menu_administration"
+        android:visible="false" />
+
+    <item
         android:title="@string/menu_news"
         android:icon="@android:drawable/btn_dialog"
         android:id="@+id/menuNews" />
