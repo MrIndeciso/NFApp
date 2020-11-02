@@ -1,4 +1,4 @@
-package com.mrindeciso.nfapp.ui.administration.recyclerViews
+package com.mrindeciso.nfapp.ui.administration.recyclerViews.viewHolders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.mrindeciso.lib.extensions.onClick

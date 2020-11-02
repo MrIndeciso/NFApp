@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mrindeciso.lib.extensions.inflateBinding
 import com.mrindeciso.lib.models.Subject
 import com.mrindeciso.nfapp.databinding.ViewholderSubjectBinding
+import com.mrindeciso.nfapp.ui.administration.recyclerViews.viewHolders.SubjectsViewHolder
 
 class SubjectsAdapter(
     private val subjectsList: List<Subject>,
