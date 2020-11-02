@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mrindeciso.lib.R
 
@@ -19,6 +20,19 @@ fun MaterialDialog(
         }
         params?.invoke(this)
     }.show()
+}
+
+@Suppress("FunctionName")
+inline fun <reified T : ViewBinding> MaterialDialog(
+    context: Context,
+    layout: T,
+    params: (T.(AlertDialog) -> Unit)
+): AlertDialog {
+    return MaterialAlertDialogBuilder(context).apply {
+        setView(layout.root)
+    }.show().apply {
+        params(layout, this)
+    }
 }
 
 fun MaterialAlertDialogBuilder.message(
