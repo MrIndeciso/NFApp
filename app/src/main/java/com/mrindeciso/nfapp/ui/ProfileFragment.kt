@@ -3,6 +3,7 @@ package com.mrindeciso.nfapp.ui
 import android.app.Activity
 import android.content.Intent
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.mrindeciso.lib.extensions.onClick
 import com.mrindeciso.lib.preferences.PreferenceManager
@@ -27,6 +28,10 @@ class ProfileFragment: ViewBoundFragment<FragmentProfileBinding>(FragmentProfile
 
     override fun onStart() {
         super.onStart()
+
+        if (preferenceManager.currentUser == null) {
+            findNavController().navigate(R.id.newUserFragment)
+        }
 
         requireActivity().setTitle(R.string.menu_profile)
 
