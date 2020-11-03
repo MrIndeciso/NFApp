@@ -49,4 +49,6 @@
     <string name="menu_sharing">Sharing</string>
     <string name="administration_promoteuser">Promote User to Administrator</string>
     <string name="login_hint_course">Course</string>
+    <string name="profile_btt_logout">Logout</string>
+    <string name="profile_btt_deletepic">Delete Profile Picture</string>
 </resources>

@@ -47,4 +47,16 @@ class ProfileViewModel @ViewModelInject constructor(
         }
     }
 
+    fun deleteProfilePic(): LiveData<Boolean> = liveData(Dispatchers.IO) {
+        preferenceManager.currentUser?.profilePicture?.let {
+            userImageRepository.deleteImage(it)
+        }
+
+        preferenceManager.currentUser?.let {
+            val newUser = it.copy(profilePicture = null)
+
+            emit(userRepository.updateUserProfilePic(newUser))
+        }
+    }
+
 }

@@ -8,7 +8,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LoL"
+        android:text="Ciao. Se stai leggendo questa scritta vuol dire che hai accesso alla Beta dell\'applicazione. Qui troverai in futuro i file e i documenti condivisi dai tuoi compagni di classe."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -50,6 +50,17 @@ class ProfileFragment: ViewBoundFragment<FragmentProfileBinding>(FragmentProfile
                         startActivityForResult(it, REQUEST_CODE)
                     }
                 }
+
+                it.bttLogout.onClick {
+                    preferenceManager.currentUser = null
+                    activity?.recreate()
+                }
+
+                it.bttDeleteProfilePicture.onClick {
+                    profileViewModel.deleteProfilePic().observe(this) {
+                        activity?.recreate()
+                    }
+                }
             }
         }
     }

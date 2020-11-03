@@ -61,6 +61,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("newPost").addOnCompleteListener {
+            it.result?.let {
+                Log.i("MainActivity", "Subscribed to topic newPost")
+            }
+        }
     }
 
     private fun hideBottomAppBar() {
