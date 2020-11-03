@@ -47,4 +47,6 @@
     <string name="menu_news">News</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_sharing">Sharing</string>
+    <string name="administration_promoteuser">Promote User to Administrator</string>
+    <string name="login_hint_course">Course</string>
 </resources>

@@ -47,7 +47,7 @@ class NewPostFragment : ViewBoundFragment<FragmentNewPostBinding>(FragmentNewPos
             Intent(ACTION_OPEN_DOCUMENT).also {
                 it.addCategory(Intent.CATEGORY_OPENABLE)
                 it.type = "image/*"
-                startActivityForResult(it, 2758)
+                startActivityForResult(it, REQUEST_CODE)
             }
         }
 
@@ -63,6 +63,8 @@ class NewPostFragment : ViewBoundFragment<FragmentNewPostBinding>(FragmentNewPos
             data?.data?.let { uri ->
                 newPostViewModel.convertImageURIToByteArray(uri)
             }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 

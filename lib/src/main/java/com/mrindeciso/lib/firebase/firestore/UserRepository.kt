@@ -27,6 +27,31 @@ class UserRepository @Inject constructor(
         }
     }
 
+    suspend fun setUserPermissionLevel(
+        name: String,
+        permissionLevel: User.PermissionLevel
+    ): Boolean {
+        return try {
+            userCollection
+                .whereEqualTo("email", name)
+                .limit(1)
+                .get()
+                .await()
+                .documents
+                .firstOrNull()
+                ?.id
+                ?.let {
+                    userCollection
+                        .document(it)
+                        .update("permission_level", permissionLevel.name)
+                        .await()
+                }
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     private suspend fun getIDbyUID(uid: String): String {
         return try {
             userCollection
@@ -59,6 +84,18 @@ class UserRepository @Inject constructor(
             userCollection
                 .document(getIDbyUID(user.id))
                 .update("fcmToken", user.fcmToken)
+                .await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    suspend fun updateUserProfilePic(user: User): Boolean {
+        return try {
+            userCollection
+                .document(getIDbyUID(user.id))
+                .update("profilePicture", user.profilePicture)
                 .await()
             true
         } catch (e: Exception) {

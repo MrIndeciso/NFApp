@@ -1,6 +1,7 @@
 package com.mrindeciso.lib.firebase.firestore
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.mrindeciso.lib.models.News
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -14,6 +15,7 @@ class NewsRepository @Inject constructor(
     suspend fun getAllNews(): List<News> {
         return try {
             newsCollection
+                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .await()
                 .toObjects(News::class.java)

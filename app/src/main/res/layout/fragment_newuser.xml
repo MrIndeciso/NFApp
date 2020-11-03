@@ -36,7 +36,7 @@
         android:layout_marginEnd="8dp"
         android:hint="@string/login_surname_hint"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/tilClass"
+        app:layout_constraintBottom_toTopOf="@+id/tilCourse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilName">
@@ -45,6 +45,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCourse"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/login_hint_course"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tilClass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilSurname">
+
+        <AutoCompleteTextView
+            android:id="@+id/actvCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -59,9 +80,10 @@
         app:layout_constraintBottom_toTopOf="@+id/tilUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSurname">
+        app:layout_constraintTop_toBottomOf="@+id/tilCourse">
 
         <AutoCompleteTextView
+            android:id="@+id/actvClass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />

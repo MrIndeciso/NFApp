@@ -56,6 +56,16 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/administration_schoolclasses"
                 android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/tvPromoteUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/administration_promoteuser"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

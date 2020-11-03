@@ -1,8 +1,11 @@
 package com.mrindeciso.nfapp.ui
 
 import android.content.Intent
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -11,12 +14,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.mrindeciso.lib.extensions.*
-import com.mrindeciso.lib.firebase.firestore.UserRepository
 import com.mrindeciso.lib.models.User
 import com.mrindeciso.lib.preferences.PreferenceManager
 import com.mrindeciso.lib.ui.ViewBoundFragment
 import com.mrindeciso.nfapp.R
 import com.mrindeciso.nfapp.databinding.FragmentNewuserBinding
+import com.mrindeciso.nfapp.ui.mvvm.NewUserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_newuser.*
 import kotlinx.coroutines.launch
@@ -32,8 +35,7 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
     @Inject
     lateinit var preferenceManager: PreferenceManager
 
-    @Inject
-    lateinit var userRepository: UserRepository
+    private val newUserViewModel by viewModels<NewUserViewModel>()
 
     override fun onStart() {
         super.onStart()
@@ -48,6 +50,24 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
             it.tvRegister.onClick {
                 register()
             }
+        }
+
+        setupDropdowns()
+    }
+
+    private fun setupDropdowns() {
+        newUserViewModel.getAllCourses().observe(this) {
+            val adapter = ArrayAdapter(requireContext(), R.layout.list_item, it.map { it.name })
+            viewBinding.actvCourse.setAdapter(adapter)
+        }
+
+        viewBinding.actvCourse.setOnItemClickListener { _, view, _, _ ->
+            newUserViewModel.getClassesByCourse((view as? TextView)?.text.toString())
+                .observe(this) {
+                    val adapter =
+                        ArrayAdapter(requireContext(), R.layout.list_item, it.map { it.name })
+                    viewBinding.actvClass.setAdapter(adapter)
+                }
         }
     }
 
@@ -71,7 +91,7 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                 .await()
                 .user!!
                 .let {
-                    val user = userRepository.getUserByUID(it.uid)
+                    val user = newUserViewModel.getUserByUID(it.uid)
 
                     if (user != null) {
                         preferenceManager.currentUser = user
@@ -130,6 +150,8 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
         it.tilSurname.isVisible = true
         it.tilPassword.isVisible = uid == null
         it.tilRepeatPassword.isVisible = uid == null
+        it.tilClass.isVisible = true
+        it.tilCourse.isVisible = true
 
         it.tilName.editText?.setText(name)
         it.tilSurname.editText?.setText(surname)
@@ -169,9 +191,12 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                     it.tilSurname.editText?.text.toString(),
                     it.tilUsername.editText?.text.toString(),
                     null,
+                    it.actvCourse.text.toString(),
+                    it.actvClass.text.toString(),
+                    null,
                     false
                 ).let {  user ->
-                    userRepository.addUser(user)
+                    newUserViewModel.addUser(user)
 
                     preferenceManager.currentUser = user
 
@@ -202,7 +227,7 @@ class NewUserFragment: ViewBoundFragment<FragmentNewuserBinding>(FragmentNewuser
                 if (uid == null) {
                     showErrorMessage(R.string.login_error_generic)
                 } else {
-                    val user = userRepository.getUserByUID(uid)
+                    val user = newUserViewModel.getUserByUID(uid)
 
                     if (user == null) {
                         register() //This makes no sense though

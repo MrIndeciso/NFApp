@@ -20,6 +20,8 @@ class NewsViewHolder(
             if (news.image != null) {
                 ivPostImage.isVisible = true
                 loadImage(position, ivPostImage)
+            } else {
+                ivPostImage.isVisible = false
             }
         }
     }

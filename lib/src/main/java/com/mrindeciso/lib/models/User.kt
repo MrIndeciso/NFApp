@@ -22,6 +22,15 @@ data class User(
     @Json(name = "phoneNumber")
     val phoneNumber: String? = null,
 
+    @Json(name = "course")
+    val course: String = "",
+
+    @Json(name = "class")
+    val schoolClass: String = "",
+
+    @Json(name = "profilePicture")
+    val profilePicture: String? = null,
+
     @Json(name = "banned")
     val banned: Boolean = false,
 
@@ -50,7 +59,6 @@ data class User(
 
     enum class PermissionLevel {
         USER,
-        MODERATOR,
         ADMINISTRATOR,
     }
 
